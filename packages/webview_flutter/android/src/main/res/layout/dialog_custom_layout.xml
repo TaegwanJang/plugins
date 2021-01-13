@@ -17,7 +17,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
+        android:background="#ffbdbdbd"/>
 
     <TextView
         android:id="@+id/tv_take_pic"
@@ -28,18 +28,19 @@
         android:textSize="16sp"
         android:textColor="@android:color/background_dark"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@android:color/darker_gray"/>
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:background="#ffbdbdbd"/>-->
 
     <TextView
         android:id="@+id/tv_cancel"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="취소"
+        android:background="#ffbdbdbd"
         android:gravity="center"
         android:textSize="16sp"
-        android:textColor="@android:color/background_dark"/>
+        android:textColor="#ff424A58"/>
 
 </LinearLayout>
