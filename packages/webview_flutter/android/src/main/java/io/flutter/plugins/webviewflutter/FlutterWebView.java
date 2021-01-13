@@ -33,6 +33,7 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
   private final MethodChannel methodChannel;
   private final FlutterWebViewClient flutterWebViewClient;
   private final Handler platformThreadHandler;
+  Context context1;
 
   // Verifies that a url opened by `Window.open` has a secure url.
   private class FlutterWebChromeClient extends WebChromeClient {
@@ -97,7 +98,36 @@ public class FlutterWebView implements PlatformView, MethodCallHandler {
 
     // Multi windows is set with FlutterWebChromeClient by default to handle internal bug: b/159892679.
     webView.getSettings().setSupportMultipleWindows(true);
-    webView.setWebChromeClient(new FlutterWebChromeClient());
+    // webView.setWebChromeClient(new FlutterWebChromeClient());
+    /**
+ * start
+ * */
+context1 = context;
+webView.setWebChromeClient(new WebChromeClient(){
+  @Override
+  public boolean onShowFileChooser(
+          WebView webView, ValueCallback<Uri[]> filePathCallback,
+          FileChooserParams fileChooserParams) {
+
+    //成功跳转newActivity！！！很 nice
+    //跳转到newActivity去打开文件夹的操作
+    Intent intent = new Intent(context1,newActivity.class);
+    newActivity.getfilePathCallback(filePathCallback);
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    context1.startActivity(intent);
+    return true;
+  }
+
+  public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
+    callback.invoke(origin, true, false);
+  }
+
+});
+
+
+/**
+ * end
+ * */
 
     methodChannel = new MethodChannel(messenger, "plugins.flutter.io/webview_" + id);
     methodChannel.setMethodCallHandler(this);
